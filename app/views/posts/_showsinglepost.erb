@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="card" id="single-post" style="width: 60%; margin: 0 auto; background-color: #f5f5f5; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <%= turbo_frame_tag "post_#{@post.id}" do %>
+
+      <div data-controller = "read-more"  data-read-more-my-value="<%= @post.description%>"class="card-body" style="padding: 20px;">
+        
+        <h5 class="card-title" style="color: black; text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 10px;"><%= @post.title %></h5>
+        
+        <p data-read-more-target ="description" class="card-text" style="color: black; text-align: justify;"><%= @post.description.truncate(24 , separator: ' ')%></p>
+        <span data-action="click->read-more#toggle" >Read More</span>
+
+
+        <p class="card-text" style="color: black;"><strong>By:</strong> <%= @post.user.email.slice(0..@post.user.email.index("@") - 1) %></p>
+        <!-- if logged in user created the post then letting him edit -->
+        <% if current_user.id == @post.user.id %>
+          <!-- Edit and Delete Post buttons -->
+          <div class="d-flex justify-content-center align-items-center" style="margin-top: 20px;">
+            <%= link_to "Edit", edit_post_path(@post), class: "btn bg-info rounded-pill me-2" %>
+            <%= link_to "Delete", @post, data: { turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: '_top' }, class: "btn bg-info rounded-pill" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

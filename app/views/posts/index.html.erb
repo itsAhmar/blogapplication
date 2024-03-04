@@ -1,0 +1,44 @@
+<% unless user_signed_in? %>
+  <div class="d-flex justify-content-end gap-2">
+    <%= link_to "LogIn", new_user_session_path, class: "btn bg-info rounded-pill" %>
+    <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success rounded-pill" %>
+  </div>
+<% end %>
+
+
+
+&nbsp;
+<h1 class="text-center text-dark">Posts</h1>
+
+<%= turbo_frame_tag 'posts_section' do %>
+  <% if user_signed_in? %>
+    <%= turbo_frame_tag Post.new do %>
+      <div class="text-end me-5">
+        <%= link_to "Create Post", new_post_path, class: "btn bg-info rounded-pill" %>
+      </div>
+    <% end %>
+  <% end %>
+
+  &nbsp;
+
+
+  <!-- Show all posts -->
+  <div id="posts">
+    <%= render @posts %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

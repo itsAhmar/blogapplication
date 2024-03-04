@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_with(model: post, class: "custom-form", data: { turbo_frame: 'posts_section' }) do |form| %>
+        <% if @post.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Oops! Something went wrong...</h4>
+            <ul>
+              <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :title, class: "form-label" %>
+          <%= form.text_field :title, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :description, class: "form-label" %>
+          <%= form.text_area :description, class: "form-control" %>
+        </div>
+
+        &nbsp;
+        <div class="form-actions text-center">
+          <%= form.submit post.new_record? ? "Create" : "Update" , class: "btn bg-info rounded-pill" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

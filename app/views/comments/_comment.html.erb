@@ -1,0 +1,40 @@
+<div class="card mb-3 comment-card" style="background-color: #e0e9f; color: #333333; border: 1px solid #333333;">
+  <%= turbo_frame_tag "post-edit" do %>
+    <div class="card-body p-2">
+      <div class="email-content-block p-2 rounded" style="background-color: #f8f9fa; display: inline-block;">
+        <div class="email" style="font-size: 12px;">
+          <strong><%= comment.user.email.slice(0..comment.user.email.index("@") - 1) %></strong>
+        </div>
+        <div class="content" style="font-size: 14px;">
+          <p><%= comment.content %></p>
+        </div>
+      </div>
+      <div class="buttons mt-2">
+        <% if current_user.id == comment.user.id %>
+          <%= link_to "Edit", edit_post_comment_path(@post, comment), class: "btn btn-sm bg-info rounded-pill me-1 " %>
+          <%= link_to "Delete", post_comment_path(@post, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" , turbo_frame: '_top'}, class: "btn btn-sm btn-danger rounded-pill me-1" %>
+        <% end %>
+        <%= turbo_frame_tag "comment-creation" do %>
+          <%= link_to "Reply", new_post_comment_path(@post, parent_id: comment.id), class: "btn btn-sm btn-secondary rounded-pill" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>   
+</div>
+
+
+<hr />
+
+<div class="sub-comment">
+  <%= render comment.comments.order(id: :desc) %>
+</div>
+
+
+<style>
+
+.sub-comment
+{
+    padding-left: 20px;
+}
+
+</style>
