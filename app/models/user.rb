@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments, dependent: :destroy
+
+  has_one_attached :image
+  validates :image, presence: true
 end
