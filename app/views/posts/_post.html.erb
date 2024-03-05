@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-md-4">
       <%= link_to user_signed_in? ? post_path(post) : new_user_session_path, class: 'text-decoration-none text-dark', data: { turbo_frame: '_top' } do %>
-        <div class="card border-0 shadow-lg rounded-3 mb-4" style="background-image: linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4); overflow: hidden;">
+        <div class="card border-0 shadow-lg rounded-3 mb-4 post-background">
           <div class="card-body">
             <h2 class="card-title text-center mb-4"><%= post.title %></h2>
             <p class="card-text text-center">By: <%= post.user.email.slice(0..post.user.email.index("@") - 1) %></p>

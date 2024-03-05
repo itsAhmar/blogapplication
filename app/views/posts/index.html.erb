@@ -1,5 +1,5 @@
 <% unless user_signed_in? %>
-  <div class="d-flex justify-content-end gap-2">
+  <div class="d-flex justify-content-end gap-2" >
     <%= link_to "LogIn", new_user_session_path, class: "btn bg-info rounded-pill" %>
     <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success rounded-pill" %>
   </div>
@@ -7,8 +7,8 @@
 
 
 
-&nbsp;
-<h1 class="text-center text-dark">Posts</h1>
+
+<h1 class="text-center text-dark my-3">Posts</h1>
 
 <%= turbo_frame_tag 'posts_section' do %>
   <% if user_signed_in? %>
@@ -19,11 +19,9 @@
     <% end %>
   <% end %>
 
-  &nbsp;
-
 
   <!-- Show all posts -->
-  <div id="posts">
+  <div id="posts" class="my-3">
     <%= render @posts %>
   </div>
 <% end %>
