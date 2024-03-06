@@ -1,58 +1,52 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: %i[new create edit update]
+  before_action :set_comment, only: %i[edit destroy]
 
-	before_action :set_post, only: %i[new create edit update]
+  def new
+    @comment = Comment.new
+  end
 
-	def new
-		@comment = Comment.new
-	end
+  def create
+    @comment = @post.comments.create(comment_params.merge(user: current_user))
 
+    if @comment.save
+      redirect_to post_path(@post)
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
 
-	def create
-		@comment = @post.comments.create(comment_params.merge(user: current_user))
-		
-		if @comment.save
-			redirect_to post_path(@post)
-		else
-			render :new , status: :unprocessable_entity
-		end
-	 end
+  def edit; end
 
+  def update
+    @comment = @post.comments.find(params[:id])
 
-	def edit
-		@comment = Comment.find(params[:id])
-	end
+    if @comment.update(comment_params.merge(user: current_user))
+      redirect_to post_path(@post)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
+  def destroy
+    @post = @comment.post
 
-	def update
-		@comment = @post.comments.find(params[:id])
+    return unless @comment.destroy
 
-		if @comment.update(comment_params.merge(user: current_user))
-			redirect_to post_path(@post)
-		else
-			render :edit , status: :unprocessable_entity 
-		end
-	end
+    redirect_to post_path(@post)
+  end
 
-			
-	def destroy
-		@comment = Comment.find(params[:id])
+  private
 
-		@post = @comment.post
-		
-		if @comment.destroy
-			redirect_to post_path(@post)
-		end
-	end
+  def set_post
+    @post = Post.find(params[:post_id])
+  end
 
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-	private
-
-	def set_post
-		@post = Post.find(params[:post_id])
-	end
-
-	def comment_params
-		params.require(:comment).permit(:content , :parent_id)
-	end
-
+  def comment_params
+    params.require(:comment).permit(:content, :parent_id)
+  end
 end

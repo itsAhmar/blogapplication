@@ -6,7 +6,7 @@
         
         <h5 class="card-title text-center fs-4 fw-bold mb-4"><%= @post.title %></h5>
 
-        <p data-read-more-target="description" class="card-text text-justify mb-0"><%= des = @post.description.truncate(120 , separator: ' ') %></p>
+        <p data-read-more-target="description" class="card-text text-justify mb-0"><%= @post.description.truncate(120 , separator: ' ') %></p>
         <% if @post.description.length > 120 %>
           <span data-action="click->read-more#toggle" data-read-more-target="toggleButton" class="mr-2 read-more-less-button" >Read More</span>
         <% end %>

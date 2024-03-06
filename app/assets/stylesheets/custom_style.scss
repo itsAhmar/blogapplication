@@ -33,9 +33,31 @@
   	}
 }
 
-//
 .post-image
 {
 	height: 300px;
 	width: auto;
+}
+
+
+.user-image
+{
+	max-height: 50px; 
+	max-width: 50px; 
+	border-radius: 50%;
+}
+
+.user-email
+{
+	font-size: 14px;
+}
+
+.comment-user-email
+{
+	font-size: 12px;
+}
+
+.comment-user-content
+{
+	margin-bottom: 0px;
 }

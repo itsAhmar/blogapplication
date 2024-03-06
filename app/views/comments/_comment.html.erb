@@ -2,11 +2,11 @@
   <%= turbo_frame_tag "post-edit" do %>
     <div class="card-body">
       <div class="email-content-block p-2 rounded bg-light d-inline-block">
-        <div class="email fs-6">
+        <div class="email comment-user-email">
           <strong><%= comment.user.email.slice(0..comment.user.email.index("@") - 1) %></strong>
         </div>
         <div class="content fs-7">
-          <p><%= comment.content %></p>
+          <p class = "comment-user-content" ><%= comment.content %></p>
         </div>
       </div>
       <div class="buttons mt-2">

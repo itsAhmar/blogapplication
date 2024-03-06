@@ -1,20 +1,17 @@
-<nav class="navbar navbar-expand-lg <%= user_signed_in? ? 'navbar-light bg-info' : 'navbar-light bg-light' %>">
+<nav class="navbar navbar-expand-lg <%='navbar-light bg-info' if user_signed_in?%>">
   <div class="container">
     <% if user_signed_in? %>
       <%= link_to "Home" , posts_path, class: 'navbar-brand text-white' %>
-
       <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-        <span class="navbar-text mx-auto text-white fs-6">
+        <span class="navbar-text mx-auto text-white user-email">
           Signed in as: <%= current_user.email %>
         </span>
         <ul class="navbar-nav">
           <li class="nav-item">
             <%= link_to "Sign Out", destroy_user_session_path, data: {turbo_method: :delete} , class: "navbar-brand text-white" %>
           </li>
-          <% if current_user.image.attached? %>
-            <%= image_tag current_user.image, class: "rounded-circle user-image", style: "max-height: 50px; max-width: 50px;" %>
-          <% end %>
         </ul>
+        <%= image_tag current_user.image, class: "rounded-circle user-image"%>
       </div>
     <% end %>
   </div>
