@@ -1,3 +1,4 @@
+<p class="alert text-center"><%= alert %></p>
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-6">
@@ -5,7 +6,6 @@
         <div class="card-body">
           <h2 class="text-center mb-4">Log in</h2>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
             <div class="mb-3">
               <%= f.label :email, class: "form-label font-weight-bold" %>
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
