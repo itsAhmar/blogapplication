@@ -2,16 +2,19 @@
   <div class="container">
     <% if user_signed_in? %>
       <%= link_to "Home" , posts_path, class: 'navbar-brand text-white' %>
-      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" >
         <span class="navbar-text mx-auto text-white user-email">
           Signed in as: <%= current_user.email %>
         </span>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <%= link_to "Sign Out", destroy_user_session_path, data: {turbo_method: :delete} , class: "navbar-brand text-white" %>
-          </li>
-        </ul>
-        <%= link_to image_tag(current_user.image, class: "rounded-circle user-image"), edit_user_registration_path%>
+        <div data-controller="dropdown" class="px-4">
+          <span data-action="click->dropdown#dp">
+          <%= image_tag current_user.image, class: "rounded-circle user-image cursor_pointer", width: "40", height: "40" %>
+          </span>
+          <div class="dropdown-menu" data-dropdown-target="list" , style= "min-width: 140px">
+            <li><%= link_to "profile setting" , edit_user_registration_path, class: "custom-links", style: "text-decoration: none !important; color: #333;"%></li>
+            <li><%= link_to "Sign Out", destroy_user_session_path, class: "custom-links", data: {turbo_method: :delete}, style: "text-decoration: none !important; color: #333;"%></li>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
