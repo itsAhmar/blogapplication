@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index]
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[show new create edit update destroy]
 
   def index
     @posts = Post.order(id: :desc).includes(:user)
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    @post = Post.new(post_params.merge(user: current_user))
+    @post = Post.new(post_params)
 
     if @post.save
       redirect_to posts_path
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    res = @post.update(post_params.merge(user: current_user))
+    res = @post.update(post_params)
 
     if @post.save
       redirect_to @post
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_url
+    redirect_to posts_path
   end
 
   private
@@ -48,6 +48,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :image)
+    params.require(:post).permit(:title, :description, :image).merge(user: current_user)
   end
 end

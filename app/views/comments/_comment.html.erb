@@ -3,7 +3,7 @@
     <div class="card-body">
       <div class="email-content-block p-2 rounded bg-light d-inline-block">
         <div class="email comment-user-email">
-          <strong><%= comment.user.email.slice(0..comment.user.email.index("@") - 1) %></strong>
+          <strong><%= comment.user.email.split('@').first %></strong>
         </div>
         <div class="content fs-7">
           <p class = "comment-user-content" ><%= comment.content %></p>
@@ -12,7 +12,7 @@
       <div class="buttons mt-2">
         <% if current_user.id == comment.user.id %>
           <%= link_to "Edit", edit_post_comment_path(@post, comment), class: "btn btn-sm btn-info rounded-pill me-1" %>
-          <%= link_to "Delete", post_comment_path(@post, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: '_top' }, class: "btn btn-sm btn-danger rounded-pill me-1" %>
+          <%= link_to "Delete", post_comment_path(@post, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: 'comments-section' }, class: "btn btn-sm btn-danger rounded-pill me-1" %>
         <% end %>
         <%= turbo_frame_tag "comment-creation" do %>
           <%= link_to "Reply", new_post_comment_path(@post, parent_id: comment.id), class: "btn btn-sm btn-secondary rounded-pill" %>
@@ -24,6 +24,6 @@
 
 
 <div class="sub-comment">
-  <%= render comment.comments.order(id: :desc) %>
+  <%= render comment.comments%>
 </div>
 

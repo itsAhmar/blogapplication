@@ -1,13 +1,13 @@
 <!-- Displaying single Post -->
 <%= turbo_frame_tag "posts_section" do%>
-  <%= render partial: "posts/showsinglepost" %>
+  <%= render partial: "details" %>
 <% end %>
 
 <!-- Displaying comments -->
 <%= turbo_frame_tag "comments-section" do %>
   <div>
     <p>
-        <%= render @post.comments.where(parent_id: nil).includes(:user)  %>
+        <%= render @post.comments.where(parent_id: nil).includes(:user)%>
     </p>
   </div>
 

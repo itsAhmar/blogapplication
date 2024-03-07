@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg <%='navbar-light bg-info' if user_signed_in?%>">
   <div class="container">
     <% if user_signed_in? %>
-      <%= link_to "Home" , posts_path, class: 'navbar-brand text-white' %>
+      <%= link_to "Home" ,root_path, class: 'navbar-brand text-white' %>
       <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" >
         <span class="navbar-text mx-auto text-white user-email">
           Signed in as: <%= current_user.email %>
@@ -11,7 +11,7 @@
           <%= image_tag current_user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
           </span>
           <div class="menu" data-dropdown-target="list">
-            <li><%= link_to "profile setting" , edit_user_registration_path%></li>
+            <li><%= link_to "profile setting" , edit_user_registration_path %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path, data: {turbo_method: :delete}%></li>
           </div>
         </div>
@@ -53,4 +53,4 @@
   .menu li a:hover {
     color: #000;
   }
-</style>
+</style> 

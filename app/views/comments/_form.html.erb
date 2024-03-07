@@ -14,7 +14,7 @@
         <%= form.text_area :content, class: "form-control", placeholder: "Write your comment here..." %>
       </div>
       <div class="form-group">
-        <%= form.hidden_field :parent_id, value: params[:parent_id] %>
+        <%= form.hidden_field :parent_id, value: @comment.parent_id%>
         <%= form.submit "Submit", class: "btn bg-info rounded-pill w-30" %>
       </div>
     <% end %>

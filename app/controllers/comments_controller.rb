@@ -1,16 +1,17 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, only: %i[new create edit update]
   before_action :set_comment, only: %i[edit destroy]
 
   def new
-    @comment = Comment.new
+    @comment = Comment.new(parent_id: params[:parent_id])
   end
 
   def create
-    @comment = @post.comments.create(comment_params.merge(user: current_user))
+    @comment = @post.comments.create(comment_params)
 
     if @comment.save
-      redirect_to post_path(@post)
+      redirect_to @post
     else
       render :new, status: :unprocessable_entity
     end
@@ -21,8 +22,8 @@ class CommentsController < ApplicationController
   def update
     @comment = @post.comments.find(params[:id])
 
-    if @comment.update(comment_params.merge(user: current_user))
-      redirect_to post_path(@post)
+    if @comment.update(comment_params)
+      redirect_to @post
     else
       render :edit, status: :unprocessable_entity
     end
@@ -31,9 +32,9 @@ class CommentsController < ApplicationController
   def destroy
     @post = @comment.post
 
-    return unless @comment.destroy
-
-    redirect_to post_path(@post)
+    if @comment.destroy
+      redirect_to @post
+    end
   end
 
   private
@@ -47,6 +48,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content, :parent_id)
+    params.require(:comment).permit(:content, :parent_id).merge(user: current_user)
   end
 end
