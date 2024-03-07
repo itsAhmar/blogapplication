@@ -1,16 +1,16 @@
 <nav class="navbar navbar-expand-lg <%='navbar-light bg-info' if user_signed_in?%>">
   <div class="container">
     <% if user_signed_in? %>
-      <%= link_to "Home" ,root_path, class: 'navbar-brand text-white' %>
-      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent" >
-        <span class="navbar-text mx-auto text-white user-email">
+      <div class="content-center" id="navbarSupportedContent" >
+        <div><%= link_to "Home" ,root_path, class: 'navbar-brand text-white' %></div>
+        <div class="navbar-text mx-auto text-white user-email">
           Signed in as: <%= current_user.email %>
-        </span>
-        <div data-controller="dropdown" class="px-4">
+        </div>
+        <div data-controller="dropdown" class="px-4 position-relative">
           <span data-action="click->dropdown#dp">
-          <%= image_tag current_user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
+            <%= image_tag current_user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
           </span>
-          <div class="menu" data-dropdown-target="list">
+          <div class="menu" data-dropdown-target="list" style="top: 40px;">
             <li><%= link_to "profile setting" , edit_user_registration_path %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path, data: {turbo_method: :delete}%></li>
           </div>
@@ -34,7 +34,12 @@
     padding: 5px 0;
     min-width: 150px; /* Adjust according to your needs */
   }
-
+  .content-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
   .menu li {
     list-style-type: none;
     padding: 8px 15px;
