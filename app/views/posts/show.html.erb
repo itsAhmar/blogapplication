@@ -7,7 +7,7 @@
 <%= turbo_frame_tag "comments-section" do %>
   <div>
     <p>
-        <%= render @post.comments.where(parent_id: nil).includes(:user).order(:created_at) %>
+        <%= render @parent_comments %>
     </p>
   </div>
 

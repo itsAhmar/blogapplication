@@ -1,0 +1,9 @@
+<div id=<%= "like_#{dom_id(likeable)}" %>>
+  <%= likeable.likes.count %> Likes
+  <% like = current_user.likes.find_by(likeable: likeable)%>
+  <% if like.nil? %>
+    <%= button_to "Like", likes_path, params: { like: {likeable_id: likeable.id , likeable_type: likeable.class.to_s} }, method: :post %>
+  <% else %>
+    <%= button_to "UnLike" ,like_path(like),  method: :delete %>
+  <% end %> 
+</div>

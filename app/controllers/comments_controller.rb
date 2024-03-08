@@ -32,9 +32,9 @@ class CommentsController < ApplicationController
   def destroy
     @post = @comment.post
 
-    if @comment.destroy
-      redirect_to @post
-    end
+    @comment.destroy
+
+    redirect_to @post
   end
 
   private

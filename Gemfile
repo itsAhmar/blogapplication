@@ -18,8 +18,8 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do
-  gem 'faker'
   gem 'debug', platforms: %i[mri windows]
+  gem 'faker'
   gem 'pry-byebug'
   gem 'rubocop', require: false
 end
