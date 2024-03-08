@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @parent_comments = @post.comments.includes(:user).where(parent_id: nil).order(:created_at)
     @comment = Comment.new
   end
 

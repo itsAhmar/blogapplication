@@ -7,12 +7,13 @@
 <%= turbo_frame_tag "comments-section" do %>
   <div>
     <p>
-        <%= render @post.comments.where(parent_id: nil).includes(:user)%>
+        <%= render @post.comments.where(parent_id: nil).includes(:user).order(:created_at) %>
     </p>
   </div>
 
   <%= turbo_frame_tag "comment-creation" do %>
     <%= render partial:'comments/form' %>
+  </div>
   <% end %>
 <% end %>
 
