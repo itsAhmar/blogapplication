@@ -9,6 +9,9 @@
           <p class = "comment-user-content" ><%= comment.content %></p>
         </div>
       </div>
+      <div class="mt-3 bg-light" >
+      <%= render partial:'likes/button' , locals: {likeable: comment}%>
+    </div>
       <div class="buttons mt-2">
         <% if current_user.id == comment.user.id %>
           <%= link_to "Edit", edit_post_comment_path(@post, comment), class: "btn btn-sm btn-info rounded-pill me-1" %>
@@ -19,8 +22,7 @@
         <% end %>
       </div>
     </div>
-  <% end %> 
-  <%= render partial:'likes/button' , locals: {likeable: comment}%>  
+  <% end %>   
 </div>
 
 

@@ -1,9 +1,16 @@
 <div id=<%= "like_#{dom_id(likeable)}" %>>
+  <div class= "likes-size">
   <%= likeable.likes.count %> Likes
+</div>
   <% like = current_user.likes.find_by(likeable: likeable)%>
   <% if like.nil? %>
-    <%= button_to "Like", likes_path, params: { like: {likeable_id: likeable.id , likeable_type: likeable.class.to_s} }, method: :post %>
+    <%= button_to likes_path, params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, method: :post, class: "btn btn-outline-none like-button border-0" do %>
+  <i class="bi bi-hand-thumbs-up"></i>
+<% end %>
+
   <% else %>
-    <%= button_to "UnLike" ,like_path(like),  method: :delete %>
-  <% end %> 
+   <%= button_to like_path(like), method: :delete, class: "btn btn-outline-none like-button border-0" do %>
+      <i class="bi bi-hand-thumbs-up-fill text-info focus"></i>
+   <% end %>
+  <% end %>
 </div>
