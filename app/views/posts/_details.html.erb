@@ -1,33 +1,34 @@
-<div class="container my-3 ">
-  <div class="card single-post-css bg-light" id="single-post">
+<div class="d-flex bg-light justify-content-center ">
+  <div class="bg-white col-md-8 mt-1">
     <%= turbo_frame_tag "post_#{@post.id}" do %>
-
+      <div class="d-flex flex-row justify-content-between"> 
+        <div class="p-2 fs-6"><%= image_tag @post.user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
+          <%= @post.user.email.split('@').first %>
+        </div>
+        <div class="p-2 fs-3 fw-bold"><%= @post.title %></div>
+        <div class="p-2"><%= @post.created_at.to_time.strftime('%B %e, %Y') %></div>
+      </div>
       <div data-controller="read-more" data-read-more-my-value="<%= @post.description %>" class="card-body p-4">
-        
-        <h5 class="card-title text-center fs-4 fw-bold mb-4"><%= @post.title %></h5>
-
-        <%= image_tag @post.user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
-        <p data-read-more-target="description" class="card-text text-justify mb-0"><%= @post.description.truncate(120 , separator: ' ') %></p>
-        <% if @post.description.length > 120 %>
-          <span data-action="click->read-more#toggle" data-read-more-target="toggleButton" class="mr-2 read-more-less-button" >Read More</span>
-        <% end %>
-        <div>
-        <%= image_tag @post.image, class: 'card-img-top rounded-3 post-image'%>
-      </div>
-        <p class="card-text text-black mt-4"><strong>By:</strong> <%= @post.user.email.split('@').first %></p>
-        <!-- if logged in user created the post then letting him edit -->
-        <% if current_user == @post.user%>
-          <!-- Edit and Delete Post buttons -->
-          <div class="d-flex justify-content-center align-items-center mt-5">
-            <%= link_to "Edit", edit_post_path(@post), class: "btn bg-info rounded-pill me-2" %>
-            <%= link_to "Delete", @post, data: { turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: '_top' }, class: "btn bg-info rounded-pill" %>
+        <div data-read-more-target="description"  class="text-break"><%= @post.description.truncate(120 , separator: ' ') %>
+        </div>
+      <% if @post.description.length > 120 %>
+          <div data-action="click->read-more#toggle" data-read-more-target="toggleButton" class="mr-2 read-more-less-button" >Read More
           </div>
-        <% end %>
+        <% end %>  
       </div>
-    <% end %>
-    <div class="p-3">
-      <%= render partial:'likes/button' , locals: { likeable: @post } %>
-    </div>
+      <% if @post.image.attached? %>
+      <div class="text-center mb-2"><%= image_tag @post.image, class:'img-fluid rounded'%></div>
+      <% end %>
+      <% if current_user == @post.user%>
+        <div class="d-flex justify-content-center">
+          <%= link_to "Edit", edit_post_path(@post), class: "btn bg-info rounded-pill me-2" %>
+          <%= link_to "Delete", @post, data: { turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: '_top' }, class: "btn bg-info rounded-pill" %>
+        </div>
+      <% end %>
+
+      <div><%= render partial:'likes/button' , locals: { likeable: @post } %></div>
+      <div><%= @post.comments.count %></div>
+    <% end %>  
   </div>
 </div>
 
