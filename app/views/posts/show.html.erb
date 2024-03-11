@@ -3,17 +3,22 @@
   <%= render partial: "details" %>
 <% end %>
 
-<!-- Displaying comments -->
+
+
+
 <%= turbo_frame_tag "comments-section" do %>
   <div>
-    <p>
+    <p class="mt-4">
         <%= render @parent_comments %>
     </p>
   </div>
-
-  <%= turbo_frame_tag "comment-creation" do %>
-    <%= render partial:'comments/form' %>
-  <% end %>
+  <div class="mb-4 col-md-10 mx-auto">
+    <%= turbo_frame_tag "comment-creation" do %>
+      <%= render partial:'comments/form' %>
+    <% end %>
+  </div>
 <% end %>
+
+
 
 

@@ -7,3 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require 'open-uri'
+50.times do
+  post = Post.new(
+    title: Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraphs(number: 3).join("\n"),
+    user_id: 1
+  )
+  file = URI.open(Faker::Avatar.image)
+  post.image.attach(io: file, filename: "image_#{rand(1000)}.jpg", content_type: 'image/jpg')
+end
