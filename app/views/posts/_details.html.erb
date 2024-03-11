@@ -1,12 +1,17 @@
 <div class="d-flex bg-light justify-content-center ">
-  <div class="bg-white col-md-8 mt-1">
+  <div class="bg-white rounded col-10 col-md-8 mt-1">
     <%= turbo_frame_tag "post_#{@post.id}" do %>
-      <div class="d-flex flex-row justify-content-between"> 
-        <div class="p-2 fs-6"><%= image_tag @post.user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
+      <div class="d-flex flex-column flex-sm-row justify-content-between">
+        <div class="p-2 fs-6">
+          <%= image_tag @post.user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
           <%= @post.user.email.split('@').first %>
         </div>
-        <div class="p-2 fs-3 fw-bold"><%= @post.title %></div>
-        <div class="p-2"><%= @post.created_at.to_time.strftime('%B %e, %Y') %></div>
+        <div class="p-2 fs-3 fw-bold">
+          <%= @post.title %>
+        </div>
+        <div class="p-2">
+          <%= @post.created_at.to_time.strftime('%B %e, %Y') %>
+        </div>
       </div>
       <div data-controller="read-more" data-read-more-my-value="<%= @post.description %>" class="card-body p-4">
         <div data-read-more-target="description"  class="text-break"><%= @post.description.truncate(120 , separator: ' ') %>
@@ -17,7 +22,7 @@
         <% end %>  
       </div>
       <% if @post.image.attached? %>
-      <div class="text-center mb-2"><%= image_tag @post.image, class:'img-fluid rounded'%></div>
+      <div class="text-center mb-2"><%= image_tag @post.image, class: 'post-image img-fluid'%></div>
       <% end %>
       <% if current_user == @post.user%>
         <div class="d-flex justify-content-center">
@@ -25,9 +30,8 @@
           <%= link_to "Delete", @post, data: { turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: '_top' }, class: "btn bg-info rounded-pill" %>
         </div>
       <% end %>
-
       <div><%= render partial:'likes/button' , locals: { likeable: @post } %></div>
-      <div><%= @post.comments.count %></div>
+        <!--<div><%= @post.comments.count%> <em>Comments</em></div> -->
     <% end %>  
   </div>
 </div>

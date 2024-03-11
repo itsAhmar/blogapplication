@@ -6,5 +6,5 @@ class Post < ApplicationRecord
   validates :title, :description, presence: true
 
   has_one_attached :image
-  # validates :image, presence: true
+  validates :image, presence: true
 end

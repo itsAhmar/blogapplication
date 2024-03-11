@@ -14,11 +14,11 @@ class LikesController < ApplicationController
 
   def destroy
   	@like = current_user.likes.find(params[:id])
-  	@l = @like
+  	@likee = @like
   	
   	if @like.destroy
   		respond_to do |format|
-    		format.turbo_stream { render turbo_stream: turbo_stream.replace("like_#{dom_id(@like.likeable)}", partial: "likes/button", locals: { likeable: @l.likeable }) }
+    		format.turbo_stream { render turbo_stream: turbo_stream.replace("like_#{dom_id(@like.likeable)}", partial: "likes/button", locals: { likeable: @likee.likeable }) }
     	end
     end
   end
