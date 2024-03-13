@@ -4,19 +4,21 @@
       <div class="comment bg-white p-3 mb-3 shadow rounded">
         <%= turbo_frame_tag "post-edit" do %>
           <div class="d-flex mb-3">
-              <%= image_tag comment.user.image, class: "rounded-circle me-3", width: "40", height: "40" %>
+              <div class="me-3">
+              <%= user_image(comment.user.image)%>
+              </div>
               <div>
-                  <h6 class="mb-0 email-size"><%= comment.user.email.split('@').first %></h6>
+                  <h6 class="mb-0 email-size"><%= split_email(comment.user.email) %></h6>
                   <p class="mb-0"><%= comment.content %></p>
               </div>
           </div>
           <div class="d-flex justify-content-between">
             <div>
-              <%= render partial:'likes/button' , locals: {likeable: comment}%>
+              <%= render partial:'likes/button' , locals: {likeable: comment, like_button: @like_button}%>
             </div>
 
             <div class="mt-2">
-              <% if current_user.id == comment.user.id %>
+              <% if current_user == comment.user %>
                 <%= link_to edit_post_comment_path(@post, comment), class: "btn btn-outline-none border-0" do %>
                   <i class="bi bi-pen"></i>
                 <% end %>

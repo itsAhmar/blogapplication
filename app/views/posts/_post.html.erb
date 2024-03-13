@@ -8,7 +8,7 @@
           <% end %>
           <div class="card-body">
             <h2 class="card-title text-center mb-4"><%= post.title %></h2>        
-            <p class="card-text text-center">By: <%= post.user.email.split('@').first %></p>
+            <p class="card-text text-center">By: <%= split_email(post.user.email)%></p>
           </div>
         </div>
       <% end %>

@@ -12,10 +12,10 @@
     <div class="flex-grow-1">
       <%= form.text_area :content, class: "form-control", placeholder: "Write your comment here..." %>
     </div>
-    <div class="ms-2">
+    <div class="ms-2 mt-3">
       <%= form.hidden_field :parent_id, value: @comment.parent_id %>
       <%= button_tag type: 'submit', class: "btn btn-outline-none border-0" do %>
-        <i class="bi bi-send"></i>
+        <i class="bi bi-send  bi-lg"></i>
       <% end %>
     </div>
   </div>

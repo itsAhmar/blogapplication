@@ -8,7 +8,7 @@
         </div>
         <div data-controller="dropdown" class="px-4 position-relative">
           <span data-action="click->dropdown#dp">
-            <%= image_tag current_user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
+            <%= user_image(current_user.image) %>
           </span>
           <div class="menu" data-dropdown-target="list" style="top: 40px;">
             <li><%= link_to "profile" , edit_user_registration_path %></li>

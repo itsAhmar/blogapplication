@@ -1,18 +1,15 @@
-<div id=<%= "like_#{dom_id(likeable)}" %>>
+<%= turbo_frame_tag "like_#{dom_id(likeable)}" do %>
   <div class="like-size">
-    <% like_count = likeable.likes.count %>
-    <%= like_count == 0 ?  '0 Like' : "#{like_count} #{'Like'.pluralize(like_count)}"%>
+   <%= display_like_count(likeable)%>
   </div>
-  <div>
-    <% like = current_user.likes.find_by(likeable: likeable)%>
-    <% if like.nil? %>
-      <%= button_to likes_path, params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, method: :post, class: "btn btn-outline-none like-button border-0" do %>
-        <i class="bi bi-hand-thumbs-up"></i>
-      <% end %>
-    <% else %>
-      <%= button_to like_path(like), method: :delete, class: "btn btn-outline-none like-button border-0" do %>
-        <i class="bi bi-hand-thumbs-up-fill text-info focus"></i> 
-      <% end %>
+  <% binding.pry %>
+  <% if local_assigns[:like_button].present? %>
+    <%= link_to like_path(local_assigns[:like_button]), class: "btn btn-outline-none border-0", data: { turbo_method: :delete } do %>
+      <i class="bi bi-hand-thumbs-up-fill text-info focus"></i>
     <% end %>
-  </div>
-</div>
+  <% else %>
+    <%= button_to likes_path, params: { like: { likeable_id: likeable.id, likeable_type: likeable.class.to_s } }, class: "btn btn-outline-none border-0" do %>
+      <i class="bi bi-hand-thumbs-up"></i>
+    <% end %>
+  <% end %>
+<% end %>

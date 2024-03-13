@@ -3,18 +3,18 @@
     <%= turbo_frame_tag "post_#{@post.id}" do %>
       <div class="d-flex flex-column flex-sm-row justify-content-between">
         <div class="fs-6 fw-bold">
-          <%= image_tag @post.user.image, class: "rounded-circle user-image", width: "40", height: "40" %>
-          <%= @post.user.email.split('@').first %>
+          <%= user_image(@post.user.image) %>
+          <%= split_email(@post.user.email) %>
         </div>
         <div class="fs-3 fw-bold">
           <%= @post.title %>
         </div>
         <div class="fw-bold">
-          <%= @post.created_at.to_time.strftime('%B %e, %Y') %>
+          <%= formatted_date(@post.created_at) %>
         </div>
       </div>
       <div data-controller="read-more" data-read-more-my-value="<%= @post.description %>" class="card-body mt-3">
-        <div data-read-more-target="description"  class="text-break"><%= @post.description.truncate(120 , separator: ' ') %>
+        <div data-read-more-target="description"  class="text-break"><%= truncate_description(@post.description)%>
         </div>
       <% if @post.description.length > 120 %>
           <div data-action="click->read-more#toggle" data-read-more-target="toggleButton" class="mr-2 read-more-less-button" >Read More
@@ -26,7 +26,7 @@
       <% end %>
       <div class="d-flex justify-content-between mt-2">
         <div>
-          <%= render partial:'likes/button' , locals: { likeable: @post } %>
+          <%= render partial:'likes/button' , locals: { likeable: @post, like_button: @like_button } %>
         </div>
         <% if current_user == @post.user%>
           <div class="d-flex justify-content-center">
