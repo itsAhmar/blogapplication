@@ -16,19 +16,19 @@
       <div data-controller="read-more" data-read-more-my-value="<%= @post.description %>" class="card-body mt-3">
         <div data-read-more-target="description"  class="text-break"><%= truncate_description(@post.description)%>
         </div>
-      <% if @post.description.length > 120 %>
+        <% if @post.description.length > 120 %>
           <div data-action="click->read-more#toggle" data-read-more-target="toggleButton" class="mr-2 read-more-less-button" >Read More
           </div>
         <% end %>  
       </div>
       <% if @post.image.attached? %>
-      <div class="text-center mb-2"><%= image_tag @post.image, class: 'post-image img-fluid'%></div>
+        <div class="text-center mb-2"><%= image_tag @post.image, class: 'post-image img-fluid'%></div>
       <% end %>
       <div class="d-flex justify-content-between mt-2">
         <div>
-          <%= render partial:'likes/button' , locals: { likeable: @post, like_button: @like_button} %>
+          <%= render partial:'likes/button' , locals: { likeable: @post } %>
         </div>
-        <% if current_user == @post.user%>
+        <% if current_user == @post.user%> 
           <div class="d-flex justify-content-center">
             <%= link_to edit_post_path(@post), class: "btn btn-outline-none border-0" do %>
               <i class="bi bi-pen"></i>
@@ -42,4 +42,3 @@
     <% end %>  
   </div>
 </div>
-

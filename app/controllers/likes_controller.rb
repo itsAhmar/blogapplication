@@ -5,10 +5,7 @@ class LikesController < ApplicationController
   	@like = current_user.likes.new(like_params)
 
   	if @like.save
- 			@like_button = current_user.likes.find_by(likeable: @like.likeable)
-  		respond_to do |format|
-    		format.turbo_stream { render turbo_stream: turbo_stream.replace("like_#{dom_id(@like.likeable)}", partial: "likes/button", locals: { likeable: @like.likeable , like_button: @like_button }) }
-    	end
+ 			like_stream
   	end
   end
 
@@ -17,17 +14,16 @@ class LikesController < ApplicationController
   	@likee = @like
 
   	if @likee.destroy
-  		@like_button = current_user.likes.find_by(likeable: @like.likeable)
-  		respond_to do |format|
-    		format.turbo_stream { render turbo_stream: turbo_stream.replace("like_#{dom_id(@like.likeable)}", partial: "likes/button", locals: { likeable: @like.likeable , like_button: @like_button }) }
-    	end
+  		like_stream
     end
   end
 
   private
 
-  def like_respond
-  	
+  def like_stream
+  	respond_to do |format|
+    	format.turbo_stream { render turbo_stream: turbo_stream.replace("like_#{dom_id(@like.likeable)}", partial: "likes/button", locals: { likeable: @like.likeable }) }
+    end
   end
 
   def like_params

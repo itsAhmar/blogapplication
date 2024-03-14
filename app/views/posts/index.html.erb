@@ -1,13 +1,14 @@
 <% unless user_signed_in? %>
-  <div class="d-flex justify-content-end gap-2" >
+  <div class="d-flex justify-content-end gap-2">
     <%= link_to "LogIn", new_user_session_path, class: "btn bg-info rounded-pill" %>
     <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-success rounded-pill" %>
   </div>
 <% end %>
+
 <h1 class="text-center text-dark my-3">Posts</h1>
 
 <%= turbo_frame_tag 'posts_section' do %>
-  <%= turbo_stream.update("flash" , partial:"shared/flash_messages") %>
+  <%= turbo_stream.update("flash", partial: "shared/flash_messages") %>
   <% if user_signed_in? %>
     <%= turbo_frame_tag Post.new do %>
       <div class="text-end me-5">
@@ -16,24 +17,8 @@
     <% end %>
   <% end %>
 
-
   <!-- Show all posts -->
   <div class="my-3">
     <%= render @posts %>
   </div>
 <% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

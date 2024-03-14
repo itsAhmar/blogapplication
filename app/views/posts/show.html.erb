@@ -1,26 +1,18 @@
-<!-- Displaying single Post -->
-<%= turbo_frame_tag "posts_section" do%>
+<%= turbo_frame_tag "posts_section" do %>
   <%= render partial: "details" %>
-  <%= turbo_stream.update("flash" , partial:"shared/flash_messages") %> 
+  <%= turbo_stream.update("flash", partial: "shared/flash_messages") %> 
 <% end %>
 
-
-
-
 <%= turbo_frame_tag "comments-section" do %>
-  <%= turbo_stream.update("flash" , partial:"shared/flash_messages") %>
+  <%= turbo_stream.update("flash", partial: "shared/flash_messages") %>
   <div>
     <p class="mt-4">
-        <%= render @parent_comments %>
+      <%= render @parent_comments %>
     </p>
   </div>
   <div class="mb-4 col-md-10 mx-auto">
     <%= turbo_frame_tag "comment-creation" do %>
-      <%= render partial:'comments/form' %>
+      <%= render partial: "comments/form" %>
     <% end %>
   </div>
 <% end %>
-
-
-
-

@@ -1,15 +1,13 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: %i[]
+  before_action :set_post
   before_action :set_comment, only: %i[edit destroy]
 
   def new
-    @post = Post.find(params[:post_id])
     @comment = Comment.new(parent_id: params[:parent_id])
   end
 
   def create
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.create(comment_params)
 
     if @comment.save
@@ -19,12 +17,9 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-    @post = Post.find(params[:post_id]) 
-  end
+  def edit; end
 
   def update
-    @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
 
     if @comment.update(comment_params)
@@ -35,7 +30,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:post_id])
     @comment.destroy
 
     redirect_to @post, notice: "comment deleted successfully!"
@@ -44,7 +38,7 @@ class CommentsController < ApplicationController
   private
 
   def set_post
-    @post = current_user.posts.find_by(id: params[:post_id])
+    @post = Post.find(params[:post_id])
   end
 
   def set_comment

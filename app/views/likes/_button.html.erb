@@ -1,9 +1,10 @@
 <%= turbo_frame_tag "like_#{dom_id(likeable)}" do %>
+  <% like = likeable.likes.detect { |like| like.user_id == current_user.id } %>
   <div class="like-size">
-   <%= display_like_count(likeable)%>
+    <%= display_like_count(likeable) %>
   </div>
-  <% if local_assigns[:like_button].present? %>
-    <%= link_to like_path(local_assigns[:like_button]), class: "btn btn-outline-none border-0", data: { turbo_method: :delete } do %>
+  <% if like.present? %>
+    <%= link_to like_path(like), class: "btn btn-outline-none border-0", data: { turbo_method: :delete } do %>
       <i class="bi bi-hand-thumbs-up-fill text-info focus"></i>
     <% end %>
   <% else %>

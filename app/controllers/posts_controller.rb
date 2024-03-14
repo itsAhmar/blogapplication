@@ -8,9 +8,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @parent_comments = @post.comments.includes(:user).where(parent_id: nil).order(:created_at)
+    @parent_comments = @post.comments.includes(:user, :likes).where(parent_id: nil).order(:created_at)
     @comment = Comment.new
-    @like_button = @post.likes.find_by(user_id: current_user.id)
   end
 
   def new
