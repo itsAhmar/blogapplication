@@ -11,9 +11,13 @@
 
     <%= javascript_importmap_tags %>
   </head>
-
   <body class="bg-light">
     <%= render "shared/navbar"%>
     <%= yield %>
+
+    <div id="flash" class="flash-style">
+      <%= render partial: "shared/flash_messages" %>
+    </div>
+
   </body>
 </html>

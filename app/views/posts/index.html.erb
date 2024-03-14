@@ -7,6 +7,7 @@
 <h1 class="text-center text-dark my-3">Posts</h1>
 
 <%= turbo_frame_tag 'posts_section' do %>
+  <%= turbo_stream.update("flash" , partial:"shared/flash_messages") %>
   <% if user_signed_in? %>
     <%= turbo_frame_tag Post.new do %>
       <div class="text-end me-5">
@@ -14,8 +15,6 @@
       </div>
     <% end %>
   <% end %>
-
-  <%= notice %>
 
 
   <!-- Show all posts -->

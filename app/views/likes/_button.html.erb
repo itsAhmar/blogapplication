@@ -2,7 +2,6 @@
   <div class="like-size">
    <%= display_like_count(likeable)%>
   </div>
-  <% binding.pry %>
   <% if local_assigns[:like_button].present? %>
     <%= link_to like_path(local_assigns[:like_button]), class: "btn btn-outline-none border-0", data: { turbo_method: :delete } do %>
       <i class="bi bi-hand-thumbs-up-fill text-info focus"></i>

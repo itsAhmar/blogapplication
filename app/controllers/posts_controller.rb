@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @parent_comments = @post.comments.includes(:user).where(parent_id: nil).order(:created_at)
     @comment = Comment.new
-    @like_post_button = @post.likes.find_by(user_id: current_user.id)
+    @like_button = @post.likes.find_by(user_id: current_user.id)
   end
 
   def new
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to posts_path
+      redirect_to posts_path, notice: "post created successfully!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post
+      redirect_to @post, notice: "post updated successfully!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, notice: "post deleted successfully!"
   end
 
   private

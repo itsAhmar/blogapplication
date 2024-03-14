@@ -3,4 +3,6 @@ class Like < ApplicationRecord
 
   belongs_to :user
   belongs_to :likeable, polymorphic: true
+  #scope :for_likeable, ->(likeable) { where(user: current_user, likeable: likeable).first }
+  
 end

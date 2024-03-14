@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(comment_params)
 
     if @comment.save
-      redirect_to @post
+      redirect_to @post, notice: "comment created successfully!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.find(params[:id])
 
     if @comment.update(comment_params)
-      redirect_to @post
+      redirect_to @post, notice: "comment updated successfully!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment.destroy
 
-    redirect_to @post
+    redirect_to @post, notice: "comment deleted successfully!"
   end
 
   private
