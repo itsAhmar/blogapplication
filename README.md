@@ -18,6 +18,7 @@ BLOG Application is a full-stack Ruby on Rails (RoR) application developed as a 
 ## Tech Stack
 
 **Client:** HTML, Bootstrap and Stimulus Js
+
 **Server:** Rails, Turbo Frames and Turbo Streams
 
 
@@ -30,11 +31,6 @@ Clone the repository to your local machine
 Install dependencies using Bundler
 ```bash
 bundle install
-```
-Set up the database
-```bash
-rails db:create
-rails db:migrate
 ```
 Set up the database
 ```bash
