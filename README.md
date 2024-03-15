@@ -8,11 +8,11 @@ BLOG Application is a full-stack Ruby on Rails (RoR) application developed as a 
 
 ## Features
 
-- **User Authentication**: Utilizes Devise gem for user authentication.
-- **Post Creation**: Users can create their posts to share with the community.
-- **Post Viewing**: Allows users to view posts created by others.
-- **Commenting**: Users can comment on posts to engage in discussions.
-- **Liking**: Provides the functionality for users to like both posts and comments.
+- **User Authentication:** Utilizes Devise gem for user authentication.
+- **Post Creation:** Users can create their posts to share with the community.
+- **Post Viewing:** Allows users to view posts created by others.
+- **Commenting:** Users can comment on posts to engage in discussions.
+- **Liking:** Provides the functionality for users to like both posts and comments.
 
 
 
