@@ -1,11 +1,7 @@
 <% if @pagy.next.present? %>
-  <%= turbo_frame_tag(
-    "posts-page-#{@pagy.next}",
-    # autoscroll: true,
-    loading: :lazy,
-    src: pagy_url_for(@pagy, @pagy.next),
-    target: "_top"
-    ) do %>
-    Loading...
+  <%= turbo_frame_tag("posts-page-#{@pagy.next}", loading: :lazy, src: pagy_url_for(@pagy, @pagy.next)) do %>
+    <div class="text-primary p-5">
+      Loading...
+    </div>
   <% end %>
 <% end %>

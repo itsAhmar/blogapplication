@@ -3,9 +3,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
   def index
-    @pagy, @posts = pagy_countless(Post.order(id: :desc).includes(:user), items: 5)
+    @pagy, @posts = pagy_countless(Post.order(id: :desc).includes(:user), items: 10)
     render "scrollable_list" if params[:page]
-    
   end
 
   def show

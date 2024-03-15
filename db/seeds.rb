@@ -16,4 +16,5 @@ require 'open-uri'
   )
   file = URI.open(Faker::Avatar.image)
   post.image.attach(io: file, filename: "image_#{rand(1000)}.jpg", content_type: 'image/jpg')
+  post.save
 end
