@@ -15,6 +15,10 @@ BLOG Application is a full-stack Ruby on Rails (RoR) application developed as a 
 - **Liking:** Provides the functionality for users to like both posts and comments.
 
 
+## Tech Stack
+
+**Client:** HTML, Bootstrap and Stimulus Js
+**Server:** Rails, Turbo Frames and Turbo Streams
 
 
 ## Installation
