@@ -3,6 +3,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   resources :posts do
+    collection do
+      post :index
+    end
     resources :comments
   end
 

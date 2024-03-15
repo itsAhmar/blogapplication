@@ -1,4 +1,6 @@
 module ApplicationHelper
+	include Pagy::Frontend
+
   def formatted_date(date)
     date.strftime('%B %e, %Y')
   end
