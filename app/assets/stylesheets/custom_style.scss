@@ -2,103 +2,32 @@
 .post-background
 {
 	background-image:linear-gradient(to right, #7F7FD5, #86A8E7, #91EAE4); 
-	overflow: hidden;
-}
-
-//for sub comment padding
-.sub-comment
-{
-	padding-left: 40px;
-}
-
-//single post
-.single-post-css
-{
-	width: 60%;
- 	margin: 0 auto;
-	border: 1px solid #ccc;
- 	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.read-more-less-button
-{
-	font-style: italic;
-	color: brown;
-	font-size: 15px;
-	&:hover {
-  	cursor: pointer;
-	}
-}
-
-.post-image
-{
-	height: 300px;
-	width: auto;
 }
 
 .user-email
 {
-	font-size: 14px;
+  font-size: 14px;
 }
 
 .like-size
 {
-	font-size: 13px;
+  font-size: 13px;
 }
 
 .email-size
 {
-	font-size: 13px;
+  font-size: 13px;
 }
 
-//dropdown menu
-.menu {
-  display: none;
-  position: absolute;
-  top: 60px;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 5px 0;
-  min-width: 150px;
 
-  li {
-    list-style-type: none;
-    padding: 8px 15px;
-
-    &:hover {
-      background-color: #f0f0f0;
-    }
-
-    a {
-      color: #333;
-      text-decoration: none;
-      display: block;
-
-      &:hover {
-        color: #000;
-      }
-    }
-  }
+.read-more-less-button
+{
+	font-size: 15px;	
 }
 
-.content-center {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+.post-image
+{
+  height: 300px;
+  width: auto;
 }
 
-.flash-style {
-  position: fixed;
-  top: 50px;
-  right: 20px;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  color: green;
-}

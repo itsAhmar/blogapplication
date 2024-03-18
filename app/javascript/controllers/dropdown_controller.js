@@ -5,7 +5,7 @@ export default class extends Controller {
 
   dp()
   {
-    this.listTarget.style.display = this.listTarget.style.display === "block" ? "none" : "block"; 
+    this.listTarget.classList.toggle('d-none');
   }
 }
 

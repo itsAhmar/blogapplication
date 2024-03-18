@@ -17,18 +17,19 @@
         <div data-read-more-target="description"  class="text-break"><%= truncate_description(@post.description)%>
         </div>
         <% if @post.description.length > 120 %>
-          <div data-action="click->read-more#toggle" data-read-more-target="toggleButton" class="mr-2 read-more-less-button" >Read More
+          <div data-action="click->read-more#toggle" data-read-more-target="toggleButton" class="mr-2 fst-italic text-primary read-more-less-button" role="button" >Read More
           </div>
         <% end %>  
       </div>
       <% if @post.image.attached? %>
-        <div class="text-center mb-2"><%= image_tag @post.image, class: 'post-image img-fluid'%></div>
+        <div class="text-center mb-2"><%= image_tag @post.image, class: 'card-img-top rounded-3 img-fluid post-image'%>
+        </div>
       <% end %>
       <div class="d-flex justify-content-between mt-2">
         <div>
           <%= render partial:'likes/button' , locals: { likeable: @post } %>
         </div>
-        <% if current_user == @post.user%> 
+        <% if current_user == @post.user %>
           <div class="d-flex justify-content-center">
             <%= link_to edit_post_path(@post), class: "btn btn-outline-none border-0" do %>
               <i class="bi bi-pen"></i>

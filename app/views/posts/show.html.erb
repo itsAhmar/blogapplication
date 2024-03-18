@@ -10,7 +10,7 @@
       <%= render @parent_comments %>
     </p>
   </div>
-  <div class="mb-4 col-md-10 mx-auto">
+  <div class="mb-4 col-md-8 mx-auto">
     <%= turbo_frame_tag "comment-creation" do %>
       <%= render partial: "comments/form" %>
     <% end %>

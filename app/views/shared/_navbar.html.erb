@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg<%= 'navbar-light bg-info' if user_signed_in? %>">
   <div class="container">
     <% if user_signed_in? %>
-      <div class="content-center" id="navbarSupportedContent">
+      <div class="d-flex justify-content-between align-items-center w-100" id="navbarSupportedContent">
         <div>
           <%= link_to "Home", root_path, class: 'navbar-brand text-white' %>
         </div>
@@ -9,12 +9,12 @@
           Signed in as: <%= current_user.email %>
         </div>
         <div data-controller="dropdown" class="px-4 position-relative">
-          <span data-action="click->dropdown#dp">
+          <span data-action="click->dropdown#dp" role="button">
             <%= user_image(current_user.image) %>
           </span>
-          <div class="menu" data-dropdown-target="list" style="top: 40px;">
-            <li><%= link_to "Profile", edit_user_registration_path %></li>
-            <li><%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete } %></li>
+          <div class="d-none position-absolute top-60 start-0 bg-white border rounded-3 menu shadow-sm z-index-1000 py-2 px-0 max-width-300 list-unstyled" data-dropdown-target="list">
+            <li class="px-3 py-1 bg-white"><%= link_to "Profile", edit_user_registration_path , class:"text-dark text-decoration-none d-block"%></li>
+            <li class="px-2 bg-white"><%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete } , class:"text-dark text-decoration-none d-block"%></li>
           </div>
         </div>
       </div>

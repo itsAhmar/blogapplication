@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "like_#{dom_id(likeable)}" do %>
-  <%like = detect_user_liked(likeable)%>
+  <% like = detect_user_liked(likeable) %>
   <div class="like-size">
     <%= display_like_count(likeable) %>
   </div>

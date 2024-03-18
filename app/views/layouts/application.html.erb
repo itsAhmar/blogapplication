@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Blog Application</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<head>
+  <title>Blog Application</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
-    <%= javascript_importmap_tags %>
-  </head>
-  <body class="bg-light">
-    <%= render "shared/navbar" %>
-    <%= yield %>
+  <%= javascript_importmap_tags %>
+</head>
+<body class="bg-light">
+  <%= render "shared/navbar" %>
+  <%= yield %>
 
-    <div id="flash" class="flash-style">
-      <%= render partial: "shared/flash_messages" %>
-    </div>
-
-  </body>
+  <div id="flash" class="position-fixed top-0 end-0 mt-5 me-3 py-6 px-3 fs-6 fw-bold text-success">
+    <%= render partial: "shared/flash_messages" %>
+  </div>
+</body>
 </html>
