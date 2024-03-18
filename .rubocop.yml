@@ -15,3 +15,5 @@ AllCops:
     - config/initializers/**/*
     - config/environments/**/*
     - db/seeds.rb
+    - config/application.rb
+    - app/controllers/users/registrations_controller.rb

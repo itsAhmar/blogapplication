@@ -6,7 +6,6 @@ class LikesController < ApplicationController
 
   def create
     @like = current_user.likes.new(like_params)
-
     return unless @like.save
 
     like_stream
@@ -14,9 +13,7 @@ class LikesController < ApplicationController
 
   def destroy
     @like = current_user.likes.find(params[:id])
-    @likee = @like
-
-    return unless @likee.destroy
+    return unless @like.destroy
 
     like_stream
   end

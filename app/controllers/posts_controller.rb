@@ -3,7 +3,8 @@
 # Controller responsible for managing posts
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
-  before_action :set_post, only: %i[edit update destroy]
+  before_action :set_post, only: %i[show]
+  before_action :set_user_post, only: %i[edit update destroy]
 
   def index
     @pagy, @posts = pagy_countless(Post.order(id: :desc).includes(:user), items: 10)
@@ -11,7 +12,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @parent_comments = @post.comments.includes(:user, :likes).where(parent_id: nil).order(:created_at)
     @comment = Comment.new
   end
@@ -48,10 +48,14 @@ class PostsController < ApplicationController
   private
 
   def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def set_user_post
     @post = current_user.posts.find_by(id: params[:id])
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :image).merge(user: current_user)
+    params.require(:post).permit(:title, :description, :image, :user_id)
   end
 end

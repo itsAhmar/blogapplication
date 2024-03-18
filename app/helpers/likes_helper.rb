@@ -2,11 +2,11 @@
 
 # Helper methods for managing likes
 module LikesHelper
-  def detect_user_liked(likeable)
+  def user_liked?(likeable)
     likeable.likes.detect { |like| like.user_id == current_user.id }
   end
 
-  def display_like_count(likeable)
+  def likes_count(likeable)
     like_count = likeable.likes.count
     like_count.zero? ? '0 Like' : "#{like_count} #{'Like'.pluralize(like_count)}"
   end
