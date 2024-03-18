@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.2.3'
@@ -8,6 +10,7 @@ gem 'devise', '~> 4.9'
 gem 'image_processing', '~> 1.2'
 gem 'importmap-rails'
 gem 'jbuilder'
+gem 'pagy'
 gem 'pg'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 7.1.3'
@@ -16,7 +19,6 @@ gem 'sprockets-rails'
 gem 'stimulus-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[windows jruby]
-gem 'pagy'
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]

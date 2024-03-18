@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Helper methods available across the application
 module ApplicationHelper
-	include Pagy::Frontend
+  include Pagy::Frontend
 
   def formatted_date(date)
     date.strftime('%B %e, %Y')

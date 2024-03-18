@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Controller responsible for managing comments associated with posts
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post
@@ -11,7 +14,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.create(comment_params)
 
     if @comment.save
-      redirect_to @post, notice: "comment created successfully!"
+      redirect_to @post, notice: 'comment created successfully!'
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,7 +26,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.find(params[:id])
 
     if @comment.update(comment_params)
-      redirect_to @post, notice: "comment updated successfully!"
+      redirect_to @post, notice: 'comment updated successfully!'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -32,7 +35,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
 
-    redirect_to @post, notice: "comment deleted successfully!"
+    redirect_to @post, notice: 'comment deleted successfully!'
   end
 
   private

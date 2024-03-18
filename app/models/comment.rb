@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Represents a comment on a post
 class Comment < ApplicationRecord
   belongs_to :post
   belongs_to :user

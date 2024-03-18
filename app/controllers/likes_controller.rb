@@ -1,32 +1,41 @@
+# frozen_string_literal: true
+
+# Controller responsible for managing likes on various resources.
 class LikesController < ApplicationController
-	include ActionView::RecordIdentifier
+  include ActionView::RecordIdentifier
 
   def create
-  	@like = current_user.likes.new(like_params)
+    @like = current_user.likes.new(like_params)
 
-  	if @like.save
- 			like_stream
-  	end
+    return unless @like.save
+
+    like_stream
   end
 
   def destroy
-  	@like = current_user.likes.find(params[:id])
-  	@likee = @like
+    @like = current_user.likes.find(params[:id])
+    @likee = @like
 
-  	if @likee.destroy
-  		like_stream
-    end
+    return unless @likee.destroy
+
+    like_stream
   end
 
   private
 
   def like_stream
-  	respond_to do |format|
-    	format.turbo_stream { render turbo_stream: turbo_stream.replace("like_#{dom_id(@like.likeable)}", partial: "likes/button", locals: { likeable: @like.likeable }) }
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          "like_#{dom_id(@like.likeable)}",
+          partial: 'likes/button',
+          locals: { likeable: @like.likeable }
+        )
+      end
     end
   end
 
   def like_params
-  	params.require(:like).permit(:likeable_id, :likeable_type)
+    params.require(:like).permit(:likeable_id, :likeable_type)
   end
 end

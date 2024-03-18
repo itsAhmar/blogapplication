@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
+# Controller responsible for managing posts
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
   before_action :set_post, only: %i[edit update destroy]
 
   def index
     @pagy, @posts = pagy_countless(Post.order(id: :desc).includes(:user), items: 10)
-    render "scrollable_list" if params[:page]
+    render 'scrollable_list' if params[:page]
   end
 
   def show
@@ -23,7 +26,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      redirect_to posts_path, notice: "post created successfully!"
+      redirect_to posts_path, notice: 'post created successfully!'
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +34,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: "post updated successfully!"
+      redirect_to @post, notice: 'post updated successfully!'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -39,7 +42,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to posts_path, notice: "post deleted successfully!"
+    redirect_to posts_path, notice: 'post deleted successfully!'
   end
 
   private

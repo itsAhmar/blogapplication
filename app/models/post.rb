@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Represents a post in the application
 class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy

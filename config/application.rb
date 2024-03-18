@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Main application class
 require_relative 'boot'
 
 require 'rails/all'

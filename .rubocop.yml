@@ -14,3 +14,4 @@ AllCops:
     - config.ru
     - config/initializers/**/*
     - config/environments/**/*
+    - db/seeds.rb
