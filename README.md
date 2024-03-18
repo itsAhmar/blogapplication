@@ -19,7 +19,7 @@ BLOG Application is a full-stack Ruby on Rails (RoR) application developed as a 
 
 **Client:** HTML, Bootstrap and Stimulus Js
 
-**Server:** Rails, Turbo Frames and Turbo Streams
+**Server:** Rails, Hotwire and turbo
 
 
 ## Installation
