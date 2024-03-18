@@ -19,7 +19,7 @@ BLOG Application is a full-stack Ruby on Rails (RoR) application developed as a 
 
 **Client:** HTML, Bootstrap and Stimulus Js
 
-**Server:** Rails, Turbo Frames and Turbo Streams
+**Server:** Rails, Hotwire and Turbo
 
 
 ## Installation
@@ -46,9 +46,3 @@ Visit http://localhost:3000 in your web browser to access the application
 ## Contributing
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-
-## License
-
-
-This project is licensed under the [MIT](https://choosealicense.com/licenses/mit/)
- License.
