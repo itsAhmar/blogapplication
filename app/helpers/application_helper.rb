@@ -8,10 +8,6 @@ module ApplicationHelper
     date.strftime('%B %e, %Y')
   end
 
-  def split_email(email)
-    email.split('@').first
-  end
-
   def truncate_description(des)
     des.truncate(120, separator: ' ')
   end

@@ -12,4 +12,6 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_one_attached :image
   validates :image, presence: true
+  validates :username , presence: true
+  validates :password, presence: true, length: { in: 6..20 }
 end

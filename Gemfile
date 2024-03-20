@@ -26,6 +26,8 @@ group :development, :test do
   gem 'letter_opener'
   gem 'pry-byebug'
   gem 'rubocop', require: false
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :development do

@@ -4,7 +4,7 @@
       <div class="d-flex flex-column flex-sm-row justify-content-between">
         <div class="fs-6 fw-bold">
           <%= user_image(@post.user.image) %>
-          <%= split_email(@post.user.email) %>
+          <%= @post.user.username %>
         </div>
         <div class="fs-3 fw-bold">
           <%= @post.title %>
