@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let(:user) { create :user }
   context 'when creating a user with valid attributes' do
-    let(:user) { create :user }
 
     it 'has only expected associations' do
       expected_associations = [:posts, :comments, :likes]
@@ -21,6 +21,7 @@ RSpec.describe User, type: :model do
   end
 
   context 'when creating a user with invalid attributes' do
+
     it 'is invalid without any attributes' do
       user = User.new
       expect(user).to_not be_valid
@@ -28,25 +29,25 @@ RSpec.describe User, type: :model do
     end
 
     it 'rejects when email is missing' do
-      user = build(:user, email: nil)
+      user.email = nil
       expect(user).not_to be_valid
       expect(user.errors[:email]).to include("can't be blank")
     end
 
     it 'rejects when username is missing' do
-      user = build(:user, username: nil)
+      user.username = nil
       expect(user).not_to be_valid
       expect(user.errors[:username]).to include("can't be blank")
     end
 
-    it 'rejects invalid image attachment' do
-      user = build(:user, image: nil)
+    it 'rejects when image is missing' do
+      user.image = nil
       expect(user).to_not be_valid
       expect(user.errors[:image]).to include("can't be blank")
     end
 
     it 'when password is missing' do
-      user = build(:user, password: nil)
+      user.password = nil
       expect(user).to_not be_valid
       expect(user.errors[:password]).to include("can't be blank")
     end
@@ -68,7 +69,6 @@ RSpec.describe User, type: :model do
   end
 
   context 'with dependent destroy associations' do
-    let(:user) { create :user }
     let(:post) { create :post, user: }
     let(:comment) { create :comment, user:, post: }
 
