@@ -22,12 +22,12 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'letter_opener'
   gem 'pry-byebug'
-  gem 'rubocop', require: false
   gem 'rspec-rails'
-  gem 'factory_bot_rails'
+  gem 'rubocop', require: false
 end
 
 group :development do
@@ -36,6 +36,7 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
 end
 

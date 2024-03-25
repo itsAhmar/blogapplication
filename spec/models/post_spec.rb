@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
@@ -5,13 +7,12 @@ RSpec.describe Post, type: :model do
   let(:post) { create :post, user: }
 
   context 'when creating a post with valid attributes' do
-
     it 'has only expected associations' do
-      expected_associations = [:comments, :likes , :user]
+      expected_associations = %i[comments likes user]
 
       actual_associations = Post.reflect_on_all_associations.map(&:name)
 
-      actual_associations -= [:image_attachment, :image_blob]
+      actual_associations -= %i[image_attachment image_blob]
 
       unexpected_associations = actual_associations - expected_associations
       expect(unexpected_associations).to be_empty, "Unexpected associations found: #{unexpected_associations}"
@@ -23,7 +24,6 @@ RSpec.describe Post, type: :model do
   end
 
   context 'when creating a post with invalid attributes' do
-
     it 'is invalid without any attributes' do
       post = Post.new
       expect(post).to_not be_valid
@@ -47,7 +47,6 @@ RSpec.describe Post, type: :model do
       expect(post).to_not be_valid
       expect(post.errors[:image]).to include("can't be blank")
     end
-
   end
 
   context 'when testing post associations' do
@@ -72,5 +71,4 @@ RSpec.describe Post, type: :model do
       expect { post.destroy }.to change { Like.count }.by(- post.likes.count)
     end
   end
-
 end

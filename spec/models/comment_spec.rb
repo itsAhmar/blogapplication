@@ -1,19 +1,20 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   let(:user) { create :user }
   let(:post) { create :post, user: }
-  let(:comment) { create :comment , user: , post: }
-  let(:child_comment) { create :comment, user:, post:, parent: comment}
+  let(:comment) { create :comment, user:, post: }
+  let(:child_comment) { create :comment, user:, post:, parent: comment }
 
   context 'when creating a comment with valid attributes' do
-
     it 'has only expected associations' do
-      expected_associations = [:user, :likes, :comments]
+      expected_associations = %i[user likes comments]
 
       actual_associations = Post.reflect_on_all_associations.map(&:name)
 
-      actual_associations -= [:image_attachment, :image_blob]
+      actual_associations -= %i[image_attachment image_blob]
 
       unexpected_associations = actual_associations - expected_associations
       expect(unexpected_associations).to be_empty, "Unexpected associations found: #{unexpected_associations}"
@@ -49,14 +50,12 @@ RSpec.describe Comment, type: :model do
   end
 
   context 'with dependent destroy associations' do
-
     it 'destroys associated likes when comment is deleted' do
       expect { comment.destroy }.to change { Like.count }.by(- comment.likes.count)
     end
 
-    it "destroys associated child comments when parent comment is destroyed" do
+    it 'destroys associated child comments when parent comment is destroyed' do
       expect { comment.destroy }.to change { Comment.count }.by(- 1 - comment.comments.count)
     end
   end
-
 end

@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { create :user }
   context 'when creating a user with valid attributes' do
-
     it 'has only expected associations' do
-      expected_associations = [:posts, :comments, :likes]
+      expected_associations = %i[posts comments likes]
 
       actual_associations = User.reflect_on_all_associations.map(&:name)
 
-      actual_associations -= [:image_attachment, :image_blob]
+      actual_associations -= %i[image_attachment image_blob]
 
       unexpected_associations = actual_associations - expected_associations
       expect(unexpected_associations).to be_empty, "Unexpected associations found: #{unexpected_associations}"
@@ -21,7 +22,6 @@ RSpec.describe User, type: :model do
   end
 
   context 'when creating a user with invalid attributes' do
-
     it 'is invalid without any attributes' do
       user = User.new
       expect(user).to_not be_valid
