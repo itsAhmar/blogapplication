@@ -25,6 +25,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry-byebug'
   gem 'rubocop', require: false
+  gem "letter_opener"
 end
 
 group :development do
@@ -35,3 +36,5 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
+
+gem "sidekiq", "~> 7.2"
