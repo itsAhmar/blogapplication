@@ -23,6 +23,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'faker'
+  gem 'letter_opener'
   gem 'pry-byebug'
   gem 'rubocop', require: false
 end
@@ -35,3 +36,7 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
 end
+
+gem 'dotenv-rails'
+gem 'redis'
+gem 'sidekiq', '~> 7.2'
