@@ -37,5 +37,6 @@ group :test do
   gem 'selenium-webdriver'
 end
 
+gem 'dotenv-rails'
 gem 'redis'
 gem 'sidekiq', '~> 7.2'
