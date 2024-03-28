@@ -37,6 +37,7 @@ end
 group :test do
   gem 'capybara'
   gem 'rails-controller-testing'
+  gem 'rspec-sidekiq'
   gem 'selenium-webdriver'
 end
 

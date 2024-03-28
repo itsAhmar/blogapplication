@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'sidekiq/testing'
 
 RSpec.describe Post, type: :model do
   let(:user) { create :user }
   let(:post) { create :post, user: }
+  let(:post1) { build :post, user: }
 
   context 'when creating a post with valid attributes' do
     it 'has only expected associations' do
@@ -69,6 +71,24 @@ RSpec.describe Post, type: :model do
     it 'destroys associated likes when post is deleted' do
       create(:like, user:, likeable: post)
       expect { post.destroy }.to change { Like.count }.by(- post.likes.count)
+    end
+  end
+
+  context 'callbacks' do
+    it 'enqueues email job after creation' do
+      expect { post1.save }.to enqueue_sidekiq_job.with('create', post1.title, post1.user.email)
+    end
+
+    it 'enqueues email job after updation' do
+      expect do
+        post.update(title: 'hello')
+      end.to enqueue_sidekiq_job.with('update', 'hello', post.user.email)
+    end
+
+    it 'enqueues email job after deletion' do
+      expect do
+        post.destroy
+      end.to enqueue_sidekiq_job.with('destroy', post.title, post.user.email)
     end
   end
 end

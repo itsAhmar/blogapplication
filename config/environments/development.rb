@@ -25,8 +25,6 @@ Rails.application.configure do
 
   config.enable_reloading = true
 
-  config.active_job.queue_adapter = :sidekiq
-
   # Do not eager load code on boot.
   config.eager_load = false
 

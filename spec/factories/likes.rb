@@ -2,5 +2,6 @@
 
 FactoryBot.define do
   factory :like do
+    # no need to add
   end
 end

@@ -17,3 +17,5 @@ AllCops:
     - db/seeds.rb
     - config/application.rb
     - app/controllers/users/registrations_controller.rb
+    - spec/models/*
+    - spec/controllers/*

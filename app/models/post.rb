@@ -9,17 +9,11 @@ class Post < ApplicationRecord
   has_one_attached :image
   validates :image, presence: true
 
-  before_save :capture_post_info
-  after_update_commit { enqueue_post_email('update') }
-  after_create_commit { enqueue_post_email('create') }
-  after_destroy_commit { enqueue_post_email('destroy') if capture_post_info }
+  after_create_commit { enqueue_post_email('create', title, user.email) }
+  after_update { enqueue_post_email('update', title, user.email) }
+  after_destroy_commit { enqueue_post_email('destroy', title, user.email) }
 
-  def capture_post_info
-    @title = title
-    @user_email = user.email
-  end
-
-  def enqueue_post_email(action)
-    SendEmailJob.perform_async(action, @title, @user_email)
+  def enqueue_post_email(action, title, user_email)
+    SendEmailJob.perform_async(action, title, user_email)
   end
 end
