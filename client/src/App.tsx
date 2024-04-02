@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import './App.css'
-import PostList from './components/Posts/PostList'
+import { useState } from "react";
+import  {BrowserRouter as Router} from "react-router-dom";
+import "./App.css";
+import NavBar from "./components/NavBar/NavBar"
+import AppRoutes from "./components/AppRoutes/AppRoutes"
 
 function App() {
   return (
-    <>
-      <div className='app'>
+    <Router>
+      <div className="app">
         <h1>Posts</h1>
-        <PostList />
+        <NavBar/>
+        <AppRoutes />
       </div>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
