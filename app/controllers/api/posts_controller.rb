@@ -8,7 +8,7 @@ module Api
 
     def index
       @posts = Post.order(id: :desc).includes(:user)
-      render json: @posts
+      render json: @posts.map { |post| post_json_with_image_url(post) }
     end
 
     def show
@@ -34,6 +34,16 @@ module Api
 
     def post_params
       params.require(:post).permit(:title, :description, :image, :user_id)
+    end
+
+    def post_json_with_image_url(post)
+      {
+        id: post.id,
+        title: post.title,
+        description: post.description,
+        user_id: post.user_id,
+        image_url: post.image.attached? ? url_for(post.image) : nil
+      }
     end
   end
 end

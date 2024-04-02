@@ -5,6 +5,7 @@ interface Post {
   id: number;
   title: string;
   description: string;
+  image_url: string;
 }
 
 function PostList() {
@@ -40,6 +41,7 @@ function PostList() {
       ) : (
         posts.map((post) => (
           <div key={post.id} className="post-container">
+            {post.image_url && <img src={post.image_url} alt={post.title} />}
             <h2>{post.title}</h2>
             <p>{post.description}</p>
           </div>
