@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PostCard from "./PostCard";
 import { API_URL } from "../../constants";
 
 interface Post {
@@ -40,11 +41,7 @@ function PostList() {
         <div>Error: {error}</div>
       ) : (
         posts.map((post) => (
-          <div key={post.id} className="post-container">
-            {post.image_url && <img src={post.image_url} alt={post.title} />}
-            <h2>{post.title}</h2>
-            <p>{post.description}</p>
-          </div>
+          <PostCard post={post} />
         ))
       )}
     </div>
