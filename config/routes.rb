@@ -2,6 +2,10 @@
 
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  namespace :api do
+    resources :posts
+  end
+
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
