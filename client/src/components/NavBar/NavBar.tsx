@@ -7,7 +7,7 @@ export default function NavBar() {
     <nav>
         <Link to="/">Posts List</Link>
         {" | "}
-        <Link to="/new">New Post</Link>
+        <Link to="/posts/new">New Post</Link>
     </nav>
   )
 }

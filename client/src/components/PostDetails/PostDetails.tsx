@@ -45,6 +45,9 @@ function PostDetails() {
       </div>
       <h2>Title: {post.title}</h2>
       <p>Description: {post.description}</p>
+      {/* <Link to="/posts/:id/edit">Edit Post</Link> */}
+      <Link to={`/posts/${post.id}/edit`}>Edit Post</Link>
+      {" | "}
       <Link to="/">Back to Posts</Link>
     </div>
   );
