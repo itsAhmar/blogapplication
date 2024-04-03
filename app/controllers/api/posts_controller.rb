@@ -22,6 +22,17 @@ module Api
       render json: @post
     end
 
+    def create
+      @post = Post.new(post_params)
+
+      @post.user_id = 1 #For now setting user_id, unless we don't get current_user
+      if @post.save
+        render json: @post, status: :created
+      else
+        render json: @post.errors, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def set_post
