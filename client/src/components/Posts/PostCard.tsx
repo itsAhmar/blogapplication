@@ -9,10 +9,7 @@ interface Post {
 
 function PostCard({ post }: { post: Post }) {
   return (
-    <div
-      key={post.id}
-      className="post-container w-[400px] rounded-md border px-5 m-5"
-    >
+    <div className="post-container w-[400px] rounded-md border px-5 m-5">
       {post.image_url && (
         <img
           src={post.image_url}

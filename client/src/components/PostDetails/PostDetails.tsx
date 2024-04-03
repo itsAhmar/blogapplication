@@ -6,6 +6,7 @@ interface Post {
   id: number;
   title: string;
   description: string;
+  image_url?: string;
 }
 
 function PostDetails() {
@@ -19,13 +20,12 @@ function PostDetails() {
         if (response.ok) {
           const res = await response.json()
           setPost(res);
-          console.log('id:- ', res.id)
         } else {
           throw new Error("Failed to fetch data");
         }
-        } catch (e) {
-          console.error("Error:", e);
-        }
+      } catch (e) {
+        console.error("Error:", e);
+      }
     }
     fetchCurrentPost();
   }, [id]);
@@ -34,6 +34,15 @@ function PostDetails() {
 
   return (
     <div>
+      <div className="flex justify-center p-5">
+        {post.image_url && (
+          <img
+            src={post.image_url}
+            alt={post.title}
+            className="h-[400px] w-[400px] rounded-md object-cover"
+          />
+        )}
+      </div>
       <h2>Title: {post.title}</h2>
       <p>Description: {post.description}</p>
       <Link to="/">Back to Posts</Link>

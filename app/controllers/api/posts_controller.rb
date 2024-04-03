@@ -12,9 +12,9 @@ module Api
     end
 
     def show
-      @parent_comments = @post.comments.includes(:user, :likes).where(parent_id: nil).order(:created_at)
-      @comment = Comment.new
-      render json: @parent_comments
+      # @parent_comments = @post.comments.includes(:user, :likes).where(parent_id: nil).order(:created_at)
+      # @comment = Comment.new
+      render json: post_json_with_image_url(@post)
     end
 
     def new

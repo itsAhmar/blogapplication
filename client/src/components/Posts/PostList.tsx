@@ -41,7 +41,9 @@ function PostList() {
         <div>Error: {error}</div>
       ) : (
         posts.map((post) => (
-          <PostCard post={post} />
+          <div key={post.id}>
+            <PostCard post={post} />
+          </div>
         ))
       )}
     </div>
