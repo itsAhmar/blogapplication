@@ -13,9 +13,9 @@ const PostForm = () => {
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<Post> = async (data) => {
     const formData = new FormData();
-    formData.append('post[image]', data.image[0]);
     formData.append('post[title]', data.title);
     formData.append('post[description]', data.description);
+    formData.append('post[image]', data.image[0]);
     try {
       const response = await axios.post(API_URL, formData);
       const { id } = response.data;

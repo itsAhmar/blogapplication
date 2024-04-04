@@ -5,7 +5,7 @@ module Api
   # Controller responsible for managing posts within the API
   class PostsController < ApplicationController
     # before_action :authenticate_user!, except: %i[index]
-    before_action :set_post, only: %i[show edit update]
+    before_action :set_post, only: %i[show edit update destroy]
 
     def index
       @posts = Post.order(id: :desc).includes(:user)
@@ -41,6 +41,14 @@ module Api
         render json: @post, status: :ok
       else
         render json: @post.errors, status: :unprocessable_entity
+      end
+    end
+
+    def destroy
+      if @post.destroy
+        render json: { message: 'Post deleted successfully' }, status: :ok
+      else
+        render json: { error: 'Failed to delete post' }, status: :unprocessable_entity
       end
     end
 

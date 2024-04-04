@@ -9,11 +9,13 @@ interface Post {
   id: string;
   title: string;
   description: string;
-  image: File;
+  image: File[];
+  image_url: string;
 }
 
 function PostList() {
   const [post, setPost] = useState<Post>();
+  const [postImage, setPostImage] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [postId, setPostId] = useState<String | null>(null)
@@ -25,13 +27,9 @@ function PostList() {
     if(id) setPostId(id);
     async function loadPosts() {
       try {
-        const response = await fetch(`${API_URL}/${id}/edit`);
-        if (response.ok) {
-          const res = await response.json();
-          setPost(res);
-        } else {
-          throw new Error("Failed to fetch data");
-        }
+        const response = await axios.get(`${API_URL}/${id}/edit`);
+        setPost(response.data);
+        setPostImage(response.data.image_url);
       } catch (e) {
         setError("Error");
       } finally {
@@ -41,10 +39,22 @@ function PostList() {
     loadPosts();
   }, [id]);
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setPostImage(imageUrl);
+    }
+  };
 
   const onSubmit: SubmitHandler<Post> = async (data) => {
+    const formData = new FormData();
+    formData.append('post[title]', data.title);
+    formData.append('post[description]', data.description);
+    formData.append('post[image]', data.image[0]);
+
     try {
-      const response = await axios.patch(`${API_URL}/${postId}`, data);
+      const response = await axios.patch(`${API_URL}/${postId}`, formData);
       const { id } = response.data;
       navigate(`/posts/${id}`);
     } catch (error) {
@@ -64,8 +74,18 @@ function PostList() {
 
         <label htmlFor='description'>Description</label>
         <textarea className='border block rounded-md' id="description" defaultValue={post?.description} {...register("description")} />
-      {/* <label htmlFor='image'>Image</label>
-        <input className="border block rounded-md" type="file" id="image" {...register("image")} /> */}
+
+        <label htmlFor='image'>Image</label>
+        <div className="post-container w-[400px] rounded-md border p-5 m-5">
+          {postImage && (
+            <img
+              src={postImage}
+              alt={post?.title}
+              className="h-[400px] w-full rounded-md object-cover"
+            />
+          )}
+        </div>
+        <input className="border block rounded-md" type="file" id="image" {...register("image")} onChange={handleImageChange} />
 
         <button className='m-5 bg-green-600'>Submit</button>
       </form>

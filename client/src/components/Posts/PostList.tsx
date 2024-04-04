@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import { API_URL } from "../../constants";
+import axios from "axios";
 
 interface Post {
   id: number;
@@ -17,13 +18,8 @@ function PostList() {
   useEffect(() => {
     async function loadPosts() {
       try {
-        const response = await fetch(API_URL);
-        if (response.ok) {
-          const json: Post[] = await response.json();
-          setPosts(json);
-        } else {
-          throw new Error("Failed to fetch data");
-        }
+        const response = await axios.get(API_URL);
+        setPosts(response.data);
       } catch (e) {
         setError("Error");
       } finally {
