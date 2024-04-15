@@ -32,6 +32,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'graphiql-rails'
   gem 'web-console'
 end
 
@@ -43,5 +44,6 @@ group :test do
 end
 
 gem 'dotenv-rails'
+gem 'graphql', '~> 2.3'
 gem 'redis'
 gem 'sidekiq', '~> 7.2'

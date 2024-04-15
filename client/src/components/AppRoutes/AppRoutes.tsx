@@ -4,7 +4,6 @@ import PostList from "../Posts/PostList";
 import PostDetails from "../PostDetails/PostDetails";
 import PostForm from "../Posts/PostForm";
 import EditPostForm from "../Posts/EditPostForm"
-import React from 'react'
 
 function AppRoutes() {
   return (

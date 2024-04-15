@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
-import { API_URL } from "../../constants";
-import axios from "axios";
+import { useQuery, gql } from '@apollo/client';
 
 interface Post {
   id: number;
@@ -10,31 +9,31 @@ interface Post {
   image_url: string;
 }
 
+const FIND_POSTS = gql`
+  query ShowPosts {
+    getPosts {
+      id
+      title
+      description
+      image
+    }
+  }`
+;
+
 function PostList() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { loading, error, data } = useQuery(FIND_POSTS);
 
   useEffect(() => {
-    async function loadPosts() {
-      try {
-        const response = await axios.get(API_URL);
-        setPosts(response.data);
-      } catch (e) {
-        setError("Error");
-      } finally {
-        setLoading(false);
-      }
+    if(data){
+      setPosts(data.getPosts);
     }
-    loadPosts();
-  }, []);
+  }, [data]);
 
   return (
     <div>
       {loading ? (
         <div>Loading...</div>
-      ) : error ? (
-        <div>Error: {error}</div>
       ) : (
         posts.map((post) => (
           <div key={post.id}>

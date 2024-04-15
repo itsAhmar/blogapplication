@@ -1,31 +1,39 @@
-import { useForm, SubmitHandler } from "react-hook-form"
-import { useNavigate } from 'react-router-dom';
-import { API_URL } from "../../constants";
-import axios from 'axios';
+import { useForm, SubmitHandler } from "react-hook-form";
+import { gql, useMutation } from '@apollo/client';
 
-type Post = {
-  title: string;
-  description: string;
-  image: File[];
-}
+
+const CREATE_POST = gql`
+  mutation CreatePost($title: String!, $description: String!) {
+    createPost(input: { title: $title, description: $description }) {
+      post {
+        title
+        description
+      }
+      errors
+    }
+  }`;
 
 const PostForm = () => {
-  const navigate = useNavigate();
+
+  const { register, handleSubmit } = useForm<Post>();
+  const [createPost, { data, loading, error }] = useMutation(CREATE_POST);
+
+  type Post = {
+    title: string;
+    description: string;
+    image: File[];
+  }
+
   const onSubmit: SubmitHandler<Post> = async (data) => {
-    const formData = new FormData();
-    formData.append('post[title]', data.title);
-    formData.append('post[description]', data.description);
-    formData.append('post[image]', data.image[0]);
     try {
-      const response = await axios.post(API_URL, formData);
-      const { id } = response.data;
-      navigate(`/posts/${id}`);
+      const { title, description, image } = data;
+      await createPost({
+        variables: { title, description }
+      });
     } catch (error) {
       console.error('Error submitting post:', error);
     }
   }
-
-  const { register, handleSubmit } = useForm<Post>();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
